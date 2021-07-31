@@ -17,7 +17,8 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed(ProductDetailScreen.routeName,
+            Navigator.of(context).pushNamed(
+                ProductDetailScreen.routeName,
                 arguments: (product.id as String));
           },
           child: Image.network(
@@ -29,7 +30,9 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black54,
           leading: IconButton(
             icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+              product.isFavorite
+                  ? Icons.favorite
+                  : Icons.favorite_border,
               color: product.isFavorite ? Colors.red : Colors.white,
             ),
             onPressed: () {
@@ -43,8 +46,19 @@ class ProductItem extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-              cart.addItem(product.id as String, product.price as double,
-                  product.title as String);
+              cart.addItem(product.id as String,
+                  product.price as double, product.title as String);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Item Added to card'),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  textColor: Colors.orange,
+                  onPressed: () {
+                    cart.removeSingleItem(product.id as String);
+                  },
+                ),
+              ));
             },
           ),
         ),
