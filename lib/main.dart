@@ -4,6 +4,7 @@ import './screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
+import './screens/cart_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
           accentColor: const Color.fromRGBO(3, 14, 33, 1),
         ),
         home: ProductsOverviewScreen(),
-        routes: {ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()},
+        routes: {
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen()
+        },
       ),
     );
   }
