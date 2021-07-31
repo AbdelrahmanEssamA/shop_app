@@ -9,7 +9,8 @@ class CartItem extends StatelessWidget {
   final int quantity;
   final String title;
 
-  CartItem(this.id, this.title, this.price, this.quantity, this.productID);
+  CartItem(
+      this.id, this.title, this.price, this.quantity, this.productID);
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -27,7 +28,8 @@ class CartItem extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       ),
       onDismissed: (direction) {
-        Provider.of<Cart>(context, listen: false).removeItem(productID);
+        Provider.of<Cart>(context, listen: false)
+            .removeItem(productID);
       },
       child: Card(
         elevation: 5,

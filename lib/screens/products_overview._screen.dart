@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_drawer.dart';
 import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/cart.dart';
@@ -9,10 +10,12 @@ enum FilterOptions { Favorites, All }
 
 class ProductsOverviewScreen extends StatefulWidget {
   @override
-  _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
+  _ProductsOverviewScreenState createState() =>
+      _ProductsOverviewScreenState();
 }
 
-class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+class _ProductsOverviewScreenState
+    extends State<ProductsOverviewScreen> {
   var _showOnlyFav = false;
   final textAdd = '\n'
       'New Items\n'
@@ -62,15 +65,18 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               child: IconButton(
                 icon: Icon(Icons.shopping_cart),
                 onPressed: () {
-                  Navigator.of(context).pushNamed((CartScreen.routeName));
+                  Navigator.of(context)
+                      .pushNamed((CartScreen.routeName));
                 },
               ),
             ),
           ],
         ),
+        drawer: AppDrawer(),
         body: Column(children: [
           Container(
-            margin: EdgeInsets.only(top: 25, left: 10, right: 10, bottom: 10),
+            margin: EdgeInsets.only(
+                top: 25, left: 10, right: 10, bottom: 10),
             padding: EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

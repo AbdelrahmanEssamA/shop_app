@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart.dart' show Cart;
+import '../providers/order.dart';
 import '../widgets/cart_item.dart';
 
 class CartScreen extends StatelessWidget {
@@ -19,35 +20,51 @@ class CartScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
+            Container(
+              margin: EdgeInsets.only(top: 25),
+              height: 250,
+              child: Image.network(
+                'https://www.totallymoney.com/credit-cards/public/img/creditcards-hero.png',
+                fit: BoxFit.cover,
+              ),
+            ),
             Card(
               margin: EdgeInsets.all(15),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10, horizontal: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Total:',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
                     Chip(
                       label: Text(
-                        cart.totalAmount.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        cart.totalAmount.toStringAsFixed(2),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 16),
                       ),
-                      backgroundColor: const Color.fromRGBO(147, 113, 234, 1),
+                      backgroundColor:
+                          const Color.fromRGBO(147, 113, 234, 1),
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     TextButton(
                       child: Text('Order Now'),
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<Orders>(context, listen: false)
+                            .addOrder(cart.items.values.toList(),
+                                cart.totalAmount);
+                        cart.clearCart();
+                      },
                       style: TextButton.styleFrom(
-                        primary: const Color.fromRGBO(147, 113, 234, 1),
+                        primary:
+                            const Color.fromRGBO(147, 113, 234, 1),
                       ),
                     )
                   ],

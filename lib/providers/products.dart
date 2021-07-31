@@ -12,8 +12,8 @@ class Products with ChangeNotifier {
             'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/5e1b2266-e664-4ddc-ae5e-511453bb5b6b/air-max-270-g-golf-shoe-qdKfmN.png'),
     Product(
       id: 'p2',
-      title: 'Air Jordans',
-      description: 'A nice pair of trousers.',
+      title: 'Air Jordans Teal',
+      description: 'Teal Air jordans limited Edition',
       price: 59.99,
       imageUrl:
           'https://cdn.shopify.com/s/files/1/0255/9429/8467/products/jordan-1-mid-tropical-twist-554724-132_1_rssk4q_1800x1800.jpg?v=1620130039',
@@ -21,7 +21,7 @@ class Products with ChangeNotifier {
     Product(
       id: 'p3',
       title: 'Jordans',
-      description: 'Warm and cozy - exactly what you need for the winter.',
+      description: 'Warm and cozy - Pair of jordans',
       price: 19.99,
       imageUrl:
           'https://sneakernews.com/wp-content/uploads/2021/04/Air-Jordan-1-Shadow-2.0-555088-035-2.jpg',

@@ -24,12 +24,13 @@ class ProductDetailScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text(loadedProvider.title as String),
+          title: Text('New Items'),
           elevation: 0.0,
           backgroundColor: Colors.transparent,
         ),
         body: Container(
-          margin: EdgeInsets.only(top: 70),
+          padding: EdgeInsets.all(25),
+          margin: EdgeInsets.only(top: 50),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -43,6 +44,62 @@ class ProductDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
               topRight: Radius.circular(40),
+            ),
+          ),
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    'New Shoes',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    loadedProvider.title as String,
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  height: 300,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image.network(
+                      loadedProvider.imageUrl as String,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  child: Text(
+                    loadedProvider.price.toString(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Text(
+                    loadedProvider.description.toString(),
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    softWrap: true,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

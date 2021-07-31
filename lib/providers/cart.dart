@@ -1,7 +1,4 @@
 import 'package:flutter/foundation.dart';
-import '../widgets/product_item.dart';
-import '../providers/products.dart';
-import 'package:provider/provider.dart';
 
 class CartItem {
   final String? id;
@@ -57,6 +54,11 @@ class Cart with ChangeNotifier {
 
   void removeItem(String pId) {
     _items!.remove(pId);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _items = {};
     notifyListeners();
   }
 }
