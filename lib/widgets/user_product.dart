@@ -36,7 +36,7 @@ class UserProductItem extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  Provider.of<Products>(context, listen: false)
+                  Provider.of<Products>(context , listen: false)
                       .deleteProduct(id);
                 },
                 icon: Icon(Icons.delete),

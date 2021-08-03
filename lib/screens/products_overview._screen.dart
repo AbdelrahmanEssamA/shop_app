@@ -5,6 +5,7 @@ import '../widgets/badge.dart';
 import '../providers/cart.dart';
 import 'package:provider/provider.dart';
 import '../screens/cart_screen.dart';
+import '../providers/products.dart';
 
 enum FilterOptions { Favorites, All }
 
@@ -17,6 +18,21 @@ class ProductsOverviewScreen extends StatefulWidget {
 class _ProductsOverviewScreenState
     extends State<ProductsOverviewScreen> {
   var _showOnlyFav = false;
+  var _isInit = true;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<Products>(context).fetchAndSetProducts();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   final textAdd = '\n'
       'New Items\n'
       'with free shipping\n';
