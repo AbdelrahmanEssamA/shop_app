@@ -19,6 +19,7 @@ class _ProductsOverviewScreenState
     extends State<ProductsOverviewScreen> {
   var _showOnlyFav = false;
   var _isInit = true;
+  var _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -27,7 +28,14 @@ class _ProductsOverviewScreenState
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<Products>(context).fetchAndSetProducts();
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -89,56 +97,62 @@ class _ProductsOverviewScreenState
           ],
         ),
         drawer: AppDrawer(),
-        body: Column(children: [
-          Container(
-            margin: EdgeInsets.only(
-                top: 25, left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                colors: [
-                  const Color.fromRGBO(147, 113, 234, 1),
-                  const Color.fromRGBO(197, 73, 188, 1),
-                  const Color.fromRGBO(215, 131, 79, 1),
-                ],
-                begin: const FractionalOffset(0.0, 0.0),
-                end: const FractionalOffset(1, 0.2),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color.fromRGBO(21, 40, 75, 1),
-                  spreadRadius: 4,
-                  blurRadius: 4,
-                  offset: Offset(0, -10),
+        body: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: const Color.fromRGBO(215, 131, 79, 1),
                 ),
-              ],
-            ),
-            height: 175,
-            child: Row(
-              children: [
+              )
+            : Column(children: [
                 Container(
-                  margin: EdgeInsets.only(right: 10),
-                  child: Text(
-                    textAdd,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        height: 1.5,
-                        fontWeight: FontWeight.bold),
+                  margin: EdgeInsets.only(
+                      top: 25, left: 10, right: 10, bottom: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                      colors: [
+                        const Color.fromRGBO(147, 113, 234, 1),
+                        const Color.fromRGBO(197, 73, 188, 1),
+                        const Color.fromRGBO(215, 131, 79, 1),
+                      ],
+                      begin: const FractionalOffset(0.0, 0.0),
+                      end: const FractionalOffset(1, 0.2),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromRGBO(21, 40, 75, 1),
+                        spreadRadius: 4,
+                        blurRadius: 4,
+                        offset: Offset(0, -10),
+                      ),
+                    ],
+                  ),
+                  height: 175,
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: Text(
+                          textAdd,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              height: 1.5,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Image.network(
+                          'https://freepngimg.com/thumb/shoes/27428-5-nike-shoes-transparent-background.png',
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: Image.network(
-                    'https://freepngimg.com/thumb/shoes/27428-5-nike-shoes-transparent-background.png',
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            ),
-          ),
-          ProductsGrid(_showOnlyFav)
-        ]),
+                ProductsGrid(_showOnlyFav)
+              ]),
       ),
     );
   }

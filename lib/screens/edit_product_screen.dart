@@ -92,35 +92,41 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
     if (_editedProduct.id != null) {
-      Provider.of<Products>(context, listen: false)
+      await Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id as String, _editedProduct);
     } else {
       try {
         await Provider.of<Products>(context, listen: false)
             .addProduct(_editedProduct);
-      } catch (e) {
+      } catch (error) {
         await showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text('An Error occurred'),
-            content: Text('Something went wrong'),
-            actions: [
+            title: Text('An error occurred!'),
+            content: Text('Something went wrong.'),
+            actions: <Widget>[
               FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/');
-                },
                 child: Text('Okay'),
-              ),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
             ],
           ),
         );
-      } finally {
-        setState(() {
-          _isLoading = true;
-        });
-        Navigator.of(context).pushNamed('/');
       }
+      // finally {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   Navigator.of(context).pop();
+      // }
     }
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
   }
 
   @override
@@ -137,7 +143,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
       ),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: const Color.fromRGBO(215, 131, 79, 1),
+              ),
             )
           : Padding(
               padding: const EdgeInsets.all(16.0),
