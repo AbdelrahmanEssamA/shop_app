@@ -14,7 +14,7 @@ class ProductItem extends StatelessWidget {
     final authToken = Provider.of<Auth>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.all(
-        Radius.circular(20),
+        Radius.circular(0),
       ),
       child: GridTile(
         child: GestureDetector(
@@ -23,9 +23,18 @@ class ProductItem extends StatelessWidget {
                 ProductDetailScreen.routeName,
                 arguments: (product.id as String));
           },
-          child: Image.network(
-            (product.imageUrl as String),
-            fit: BoxFit.cover,
+          child: Hero(
+            tag: product.id as String,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: AssetImage('images/temp.png'),
+                image: NetworkImage(
+                  (product.imageUrl as String),
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ),
         footer: GridTileBar(

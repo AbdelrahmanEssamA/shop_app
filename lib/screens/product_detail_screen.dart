@@ -31,8 +31,8 @@ class ProductDetailScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
         ),
         body: Container(
-          padding: EdgeInsets.all(25),
-          margin: EdgeInsets.only(top: 50),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+          margin: EdgeInsets.only(top: 25),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -69,12 +69,14 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 30),
-                  height: 300,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.network(
-                      loadedProvider.imageUrl as String,
-                      fit: BoxFit.cover,
+                  child: Hero(
+                    tag: loadedProvider.id as String,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        loadedProvider.imageUrl as String,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

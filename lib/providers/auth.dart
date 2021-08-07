@@ -124,7 +124,6 @@ class Auth with ChangeNotifier {
     _userId = extractedUserData['userId'];
     _expireDate = expiryDate;
     notifyListeners();
-    print(extractedUserData);
     return true;
   }
 

@@ -42,7 +42,6 @@ class Products with ChangeNotifier {
       final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodID, prodData) {
-        print(favoriteData[prodID]);
         loadedProducts.add(
           Product(
               id: prodID,
@@ -88,7 +87,6 @@ class Products with ChangeNotifier {
       // _items.insert(0, newProduct); // at the start of the list
       notifyListeners();
     } catch (error) {
-      print(error);
       throw error;
     }
   }
