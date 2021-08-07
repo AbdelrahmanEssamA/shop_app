@@ -6,9 +6,11 @@ class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
   @override
   Widget build(BuildContext context) {
-    final productID = ModalRoute.of(context)?.settings.arguments as String;
+    final productID =
+        ModalRoute.of(context)?.settings.arguments as String;
     final loadedProvider =
-        Provider.of<Products>(context, listen: false).findById(productID);
+        Provider.of<Products>(context, listen: false)
+            .findById(productID);
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -24,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('New Items'),
+          title: Text('ElSharmota'),
           elevation: 0.0,
           backgroundColor: Colors.transparent,
         ),
@@ -61,7 +63,8 @@ class ProductDetailScreen extends StatelessWidget {
                 Container(
                   child: Text(
                     loadedProvider.title as String,
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style:
+                        TextStyle(color: Colors.white, fontSize: 24),
                   ),
                 ),
                 Container(
@@ -92,10 +95,12 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 10, vertical: 5),
                   child: Text(
                     loadedProvider.description.toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    style:
+                        TextStyle(color: Colors.white, fontSize: 18),
                     softWrap: true,
                   ),
                 ),

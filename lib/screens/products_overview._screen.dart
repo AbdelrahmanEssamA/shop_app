@@ -42,7 +42,7 @@ class _ProductsOverviewScreenState
   }
 
   final textAdd = '\n'
-      'New Items\n'
+      'New Sluts\n'
       'with free shipping\n';
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _ProductsOverviewScreenState
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            'Rap It',
+            'Fap It',
             style: TextStyle(fontSize: 24),
           ),
           backgroundColor: Colors.transparent,
@@ -137,14 +137,14 @@ class _ProductsOverviewScreenState
                           textAdd,
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 22,
+                              fontSize: 20,
                               height: 1.5,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                       Expanded(
                         child: Image.network(
-                          'https://freepngimg.com/thumb/shoes/27428-5-nike-shoes-transparent-background.png',
+                          'https://www.stickerni.tn/wp-content/uploads/2020/04/Send-nudes.png',
                           fit: BoxFit.cover,
                         ),
                       )

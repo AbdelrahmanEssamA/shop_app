@@ -6,8 +6,10 @@ import 'dart:async';
 import '../models/http_exception.dart';
 
 class Products with ChangeNotifier {
+  final String authToken;
+  final String userId;
   List<Product> _items = [];
-
+  Products(this.authToken, this._items, this.userId);
   var _showFavoritesOnly = false;
   List<Product> get items {
     return [..._items];
@@ -23,23 +25,34 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     var url = Uri.https('rapit-flutter-default-rtdb.firebaseio.com',
-        '/products.json');
+        '/products.json', {'auth': '$authToken'});
+    var favUrl = Uri.https(
+        'rapit-flutter-default-rtdb.firebaseio.com',
+        '/$userId.json',
+        {'auth': '$authToken'});
     try {
       final res = await http.get(url);
+
       final extractedData =
           jsonDecode(res.body) as Map<String, dynamic>;
       if (extractedData == null) {
         return;
       }
+      final favoriteResponse = await http.get(favUrl);
+      final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodID, prodData) {
+        print(favoriteData[prodID]);
         loadedProducts.add(
           Product(
               id: prodID,
               title: prodData['title'],
               description: prodData['description'],
               price: prodData['price'],
-              isFavorite: prodData['isFavorite'],
+              isFavorite:
+                  favoriteData == null || favoriteData[prodID] == null
+                      ? false
+                      : favoriteData[prodID],
               imageUrl: prodData['imageUrl']),
         );
       });
@@ -52,7 +65,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product product) async {
     var url = Uri.https('rapit-flutter-default-rtdb.firebaseio.com',
-        '/products.json');
+        '/products.json', {'auth': '$authToken'});
     try {
       final response = await http.post(
         url,
@@ -61,7 +74,7 @@ class Products with ChangeNotifier {
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
-          'isFavorite': product.isFavorite,
+          'creatorId': userId
         }),
       );
       final newProduct = Product(
@@ -84,7 +97,7 @@ class Products with ChangeNotifier {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
       var url = Uri.https('rapit-flutter-default-rtdb.firebaseio.com',
-          '/products/$id.json');
+          '/products/$id.json', {'auth': '$authToken'});
       await http.patch(url,
           body: json.encode({
             'title': newProduct.title,
@@ -101,7 +114,7 @@ class Products with ChangeNotifier {
 
   Future<void> deleteProduct(String id) async {
     final url = Uri.https('rapit-flutter-default-rtdb.firebaseio.com',
-        '/products/$id.json');
+        '/products/$id.json', {'auth': '$authToken'});
     final existingProductIndex =
         _items.indexWhere((prod) => prod.id == id);
     Product? existingProduct = _items[existingProductIndex];
