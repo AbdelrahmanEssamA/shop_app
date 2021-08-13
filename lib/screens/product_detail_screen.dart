@@ -26,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('ElSharmota'),
+          title: Text('Item'),
           elevation: 0.0,
           backgroundColor: Colors.transparent,
         ),

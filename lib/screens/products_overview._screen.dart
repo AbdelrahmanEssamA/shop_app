@@ -42,7 +42,7 @@ class _ProductsOverviewScreenState
   }
 
   final textAdd = '\n'
-      'New Sluts\n'
+      'New Items\n'
       'with free shipping\n';
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _ProductsOverviewScreenState
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            'Fap It',
+            'Rap It',
             style: TextStyle(fontSize: 24),
           ),
           backgroundColor: Colors.transparent,
@@ -144,7 +144,7 @@ class _ProductsOverviewScreenState
                       ),
                       Expanded(
                         child: Image.network(
-                          'https://www.stickerni.tn/wp-content/uploads/2020/04/Send-nudes.png',
+                          'https://lh3.googleusercontent.com/proxy/G4X8I6txBfhjd3dOW4CyH_fFp2hZBV36Dbl_fiwqOejayYkmXupp4kY6ben6WppKDHA7cNCdYutMJHf-wNjR5Nr6jX4q_gAh4PLujWi3gvS7T0cuyxRbChg2GIaYxmKLcColVUKgxzDcb0G2bnZihtxY8yHqmZ7qHVm2tuTiujKvq0LdGkhSpkaF',
                           fit: BoxFit.cover,
                         ),
                       )
